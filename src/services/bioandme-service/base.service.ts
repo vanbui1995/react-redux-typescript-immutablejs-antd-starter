@@ -1,10 +1,8 @@
 import axios from 'axios';
+import { store } from 'index';
 import qs from 'qs';
-import { RootState } from 'types';
 
 import AuthSelectors from '../../redux/auth/auth.selectors';
-
-const store: any = {};
 
 const APIService = axios.create({
   baseURL: process.env.BACKEND_API_URL,

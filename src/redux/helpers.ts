@@ -21,8 +21,8 @@ export const normalizeArr = <T>(
   keyName: string = '_id',
 ): Record<string, T> => {
   const normalizedObj: Record<string, T> = {};
-  array.map(item => {
-    normalizedObj[keyName] = item;
+  array.forEach(item => {
+    normalizedObj[item[keyName]] = item;
   });
   return normalizedObj;
 };

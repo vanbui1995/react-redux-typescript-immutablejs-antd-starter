@@ -4,13 +4,14 @@ import TodoAction from './todo.actions';
 import { StandardAction } from '../types';
 import { TodoPayload, TodoState } from './types';
 import { normalizeArr } from 'redux/helpers';
-import { current } from '@reduxjs/toolkit';
+import { ReduxCollections } from 'enums';
 
 const initData: TodoState = {
-  isFetching: true,
+  isFetching: false,
   error: null,
   todos: {},
   isUpdatingById: {},
+  selectedCategory: null,
 };
 
 const initialState = Record(initData)(initData);
@@ -48,23 +49,27 @@ export default class TodoReducer {
 
   static handleFetch = (
     state: RecordOf<TodoState>,
-    action: StandardAction<{ todos }>,
+    action: StandardAction<{ todos: TodoPayload[] }>,
   ): RecordOf<TodoState> => {
     switch (action.type) {
       case TodoAction.TYPES.FETCH.START:
         return state.set('isFetching', true).set('error', '');
       case TodoAction.TYPES.FETCH.SUCCESS:
-        return state
-          .set('isFetching', false)
-          .set('todos', normalizeArr<TodoPayload>(action.payload?.todos));
-
+        if (action.payload) {
+          return state
+            .set('isFetching', false)
+            .set(
+              ReduxCollections.TODO,
+              normalizeArr<TodoPayload>(action.payload.todos),
+            );
+        }
+        return state;
       case TodoAction.TYPES.FETCH.FAILURE:
         return state.set('isFetching', false).set('error', action.error);
 
       default:
         return state;
     }
-    return state;
   };
 
   static handleUpdate = (
@@ -101,11 +106,14 @@ export default class TodoReducer {
           .setIn(['isUpdatingById', action.payload?.todo._id], true)
           .set('error', '');
       case TodoAction.TYPES.UPDATE_PARTIAL.SUCCESS:
-        const currentTodo = state.todos[action.payload?.todo._id || 0];
-        const mergedTodo = merge(currentTodo, action.payload?.todo || {});
-        return state
-          .setIn(['isUpdatingById', action.payload?.todo._id], false)
-          .setIn(['todos', action.payload?.todo._id], mergedTodo);
+        if (action.payload) {
+          const currentTodo = state.todos[action.payload.todo._id];
+          const mergedTodo = merge(currentTodo, action.payload.todo);
+          return state
+            .setIn(['isUpdatingById', action.payload?.todo._id], false)
+            .setIn(['todos', action.payload?.todo._id], mergedTodo);
+        }
+        return state;
 
       case TodoAction.TYPES.UPDATE_PARTIAL.FAILURE:
         return state
@@ -115,7 +123,5 @@ export default class TodoReducer {
       default:
         return state;
     }
-
-    return state;
   };
 }

@@ -1,3 +1,4 @@
+import { ReduxCollectionType } from 'enums';
 import { createPayloadAction } from '../helpers';
 import { StandardAction } from '../types';
 import { TodoPayload } from './types';
@@ -33,8 +34,16 @@ export default class TodoAction {
 
   static fetchTodoSuccess = (
     todos: TodoPayload[],
-  ): StandardAction<{ todos: TodoPayload[] }> =>
-    createPayloadAction(TodoAction.TYPES.FETCH.SUCCESS, { todos });
+    collections?: ReduxCollectionType,
+  ): StandardAction<
+    { todos: TodoPayload[] },
+    { collections?: ReduxCollectionType }
+  > =>
+    createPayloadAction(
+      TodoAction.TYPES.FETCH.SUCCESS,
+      { todos },
+      { collections },
+    );
 
   static fetchTodoError = (error?: string): StandardAction =>
     createPayloadAction(

@@ -77,6 +77,6 @@ function* signOutUser() {
   yield takeEvery(SIGNOUT.START, signOut);
 }
 
-export default function* rootSaga(): Generator {
+export default function* AuthSaga(): Generator {
   yield all([fork(signInUser), fork(createUserAccount), fork(signOutUser)]);
 }

@@ -21,12 +21,12 @@ import { App } from 'app';
 
 import { HelmetProvider } from 'react-helmet-async';
 
-import { configureAppStore } from 'store/configureStore';
+import { configureAppStore } from 'redux/configStore';
 
 // Initialize languages
 import './locales/i18n';
 
-const store = configureAppStore();
+export const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
