@@ -85,11 +85,7 @@ export const updateAndIndexingData = <T, Y>(
       // Begin process data & add remove indexing to state if needed
       currentIndex = getCurrentIndexes(index);
       const previousItemIndex = previousItem && previousItem[index];
-      if (
-        previousItem &&
-        previousItemIndex &&
-        previousItemIndex !== itemIndex
-      ) {
+      if (previousItem && previousItemIndex !== itemIndex) {
         const updatedIndexes = (currentIndex[previousItem[index]] || []).filter(
           _id => _id !== item[key],
         );

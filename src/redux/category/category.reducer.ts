@@ -1,9 +1,9 @@
-import { RecordOf, Record, merge } from 'immutable';
+import { RecordOf, Record } from 'immutable';
 
 import CategoryAction from './category.actions';
 import { StandardAction } from '../types';
 import { CategoryPayload, CategoryState } from './types';
-import { normalizeArr, updateAndIndexingData } from 'redux/helpers';
+import { generateIndexes, updateAndIndexingData } from 'redux/helpers';
 import { ReduxCollections, ReduxCollectionType, ReduxModules } from 'enums';
 
 const initData: CategoryState = {
@@ -11,6 +11,7 @@ const initData: CategoryState = {
   error: null,
   categories: {},
   isUpdatingById: {},
+  indexes: generateIndexes(ReduxModules.CATEGORY),
 };
 
 const initialState = Record(initData)(initData);
@@ -135,8 +136,6 @@ export default class CategoryReducer {
     state: RecordOf<CategoryState>,
     categories: CategoryPayload[],
   ): RecordOf<CategoryState> => {
-    const currentCategories = state.categories;
-    const mergedCategory = merge(currentCategories, normalizeArr(categories));
-    return state.set('categories', mergedCategory);
+    return updateAndIndexingData(categories, ReduxModules.CATEGORY, state);
   };
 }
