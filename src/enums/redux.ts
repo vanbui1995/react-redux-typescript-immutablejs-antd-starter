@@ -28,8 +28,8 @@ export const ReduxIndexes = {
   [ReduxModules.CATEGORY]: [IndexeKeys.CATEGORY_IS_DELETED],
 };
 export interface ReduxCollectionType {
-  [ReduxModules.TODO]: TodoPayload[];
-  [ReduxModules.CATEGORY]: CategoryPayload[];
+  [ReduxModules.TODO]?: TodoPayload[];
+  [ReduxModules.CATEGORY]?: CategoryPayload[];
 }
 
 export type IndexesType = Record<IndexeKeys, Record<string, string[]>>;

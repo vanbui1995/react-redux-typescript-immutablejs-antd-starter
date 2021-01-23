@@ -7,6 +7,7 @@ import { createInjectorsEnhancer } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
 
 import { createReducer } from './rootReducer';
+import RootSaga from './rootSaga';
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
@@ -29,5 +30,8 @@ export function configureAppStore() {
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
   });
+
+  runSaga(RootSaga);
+
   return store;
 }
