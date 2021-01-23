@@ -1,3 +1,13 @@
 {
-  "title": "welcome"
+  "title": "welcome",
+  "common": {
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit"
+  },
+  "validation": {
+    "messages": {
+      "required": "Required"
+    }
+  }
 }

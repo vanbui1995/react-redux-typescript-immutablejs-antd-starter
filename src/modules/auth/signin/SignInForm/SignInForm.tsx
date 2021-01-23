@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthAction, AuthSelectors } from 'redux/auth';
 import { useHistory } from 'react-router-dom';
 import { ROUTE_PATH } from 'enums';
+import { translations } from 'locales/translations';
+import { useTranslation } from 'react-i18next';
 
 const layout = {
   labelCol: { span: 8 },
@@ -16,6 +18,7 @@ export default function SignInForm() {
   const isLogged = !!useSelector(AuthSelectors.getAccessToken);
   const isSingingIn = !!useSelector(AuthSelectors.getIsSigning);
   const history = useHistory();
+  const { t } = useTranslation();
   useEffect(() => {
     if (isLogged) {
       history.replace(ROUTE_PATH.DASHBOARD);
@@ -34,23 +37,33 @@ export default function SignInForm() {
       onFinish={onFinish}
     >
       <Form.Item
-        label="Email"
+        label={t(translations.common.email)}
         name="email"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[
+          {
+            required: true,
+            message: t(translations.validation.messages.required),
+          },
+        ]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Password"
+        label={t(translations.common.password)}
         name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[
+          {
+            required: true,
+            message: t(translations.validation.messages.required),
+          },
+        ]}
       >
         <Input.Password />
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button loading={isSingingIn} type="primary" htmlType="submit">
-          Submit
+          {t(translations.common.submit)}
         </Button>
       </Form.Item>
     </Form>
