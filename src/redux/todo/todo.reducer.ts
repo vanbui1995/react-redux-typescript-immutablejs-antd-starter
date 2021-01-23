@@ -4,7 +4,7 @@ import TodoAction from './todo.actions';
 import { StandardAction } from '../types';
 import { TodoPayload, TodoState } from './types';
 import { generateIndexes, updateAndIndexingData } from 'redux/helpers';
-import { ReduxModules } from 'enums';
+import { ReduxCollections, ReduxCollectionType, ReduxModules } from 'enums';
 
 const initData: TodoState = {
   isFetching: false,
@@ -22,6 +22,12 @@ export default class TodoReducer {
     state: RecordOf<TodoState> = initialState,
     action: StandardAction,
   ): RecordOf<TodoState> {
+    // Handle add from other redux modules
+    const Meta = action.meta as { collections?: ReduxCollectionType };
+    const todosFromMeta = Meta?.collections?.[ReduxCollections.TODO];
+    if (todosFromMeta && todosFromMeta?.length) {
+      return TodoReducer.handleAddContinues(state, todosFromMeta || []);
+    }
     switch (action.type) {
       // Fetch
       case TodoAction.TYPES.FETCH.START:
@@ -130,5 +136,12 @@ export default class TodoReducer {
       default:
         return state;
     }
+  };
+
+  static handleAddContinues = (
+    state: RecordOf<TodoState>,
+    todos: TodoPayload[],
+  ): RecordOf<TodoState> => {
+    return updateAndIndexingData(todos, ReduxModules.TODO, state);
   };
 }

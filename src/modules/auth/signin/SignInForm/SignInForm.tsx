@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthAction, AuthSelectors } from 'redux/auth';
 import { useHistory } from 'react-router-dom';
 import { ROUTE_PATH } from 'enums';
-import { translations } from 'locales/translations';
 import { useTranslation } from 'react-i18next';
 
 const layout = {
@@ -37,12 +36,12 @@ export default function SignInForm() {
       onFinish={onFinish}
     >
       <Form.Item
-        label={t(translations.common.email)}
+        label={t('common.email')}
         name="email"
         rules={[
           {
             required: true,
-            message: t(translations.validation.messages.required),
+            message: t('validation.messages.required'),
           },
         ]}
       >
@@ -50,12 +49,12 @@ export default function SignInForm() {
       </Form.Item>
 
       <Form.Item
-        label={t(translations.common.password)}
+        label={t('common.password')}
         name="password"
         rules={[
           {
             required: true,
-            message: t(translations.validation.messages.required),
+            message: t('validation.messages.required'),
           },
         ]}
       >
@@ -63,7 +62,7 @@ export default function SignInForm() {
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button loading={isSingingIn} type="primary" htmlType="submit">
-          {t(translations.common.submit)}
+          {t('common.submit')}
         </Button>
       </Form.Item>
     </Form>

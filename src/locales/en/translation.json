@@ -3,7 +3,8 @@
   "common": {
     "email": "Email",
     "password": "Password",
-    "submit": "Submit"
+    "submit": "Submit",
+    "signout": "Sign Out"
   },
   "validation": {
     "messages": {

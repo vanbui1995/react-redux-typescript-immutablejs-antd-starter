@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AuthAction, AuthSelectors } from 'redux/auth';
+import { useTranslation } from 'react-i18next';
 
 import { Layout, Menu } from 'antd';
 import {
@@ -19,6 +20,7 @@ const { Header, Sider, Content } = Layout;
 export default function DashboardLayoutRoutes() {
   const isLogged = !!useSelector(AuthSelectors.getAccessToken);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const history = useHistory();
   useEffect(() => {
     if (!isLogged) {
@@ -45,7 +47,7 @@ export default function DashboardLayoutRoutes() {
             nav 2
           </Menu.Item>
           <Menu.Item onClick={logOut} key="3" icon={<UploadOutlined />}>
-            Sign Out
+            {t('common.signout')}
           </Menu.Item>
         </Menu>
       </Sider>
