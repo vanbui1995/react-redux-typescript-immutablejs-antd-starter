@@ -1,9 +1,7 @@
 import { ROUTE_PATH } from 'enums';
-import { HomePage } from 'modules/common-pages';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Switch, Route, Redirect } from 'react-router-dom';
 import { AuthAction, AuthSelectors } from 'redux/auth';
 
 import { Layout, Menu } from 'antd';
@@ -14,6 +12,7 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
+import DashboardRoutes from '../DashboardRoutes/DashboardRoutes';
 
 const { Header, Sider, Content } = Layout;
 
@@ -68,10 +67,7 @@ export default function DashboardLayoutRoutes() {
             minHeight: 'calc(100vh - 112px)',
           }}
         >
-          <Switch>
-            <Route exact path={ROUTE_PATH.DASHBOARD} component={HomePage} />
-            <Redirect to={ROUTE_PATH.DASHBOARD} />
-          </Switch>
+          <DashboardRoutes />
         </Content>
       </Layout>
     </Layout>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthAction, AuthSelectors } from 'redux/auth';
 import { useHistory } from 'react-router-dom';
