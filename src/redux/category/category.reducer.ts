@@ -3,9 +3,8 @@ import { RecordOf, Record, merge } from 'immutable';
 import CategoryAction from './category.actions';
 import { StandardAction } from '../types';
 import { CategoryPayload, CategoryState } from './types';
-import { normalizeArr } from 'redux/helpers';
-import { ReduxCollections, ReduxCollectionType } from 'enums';
-import { TodoAction } from 'redux/todo';
+import { normalizeArr, updateAndIndexingData } from 'redux/helpers';
+import { ReduxCollections, ReduxCollectionType, ReduxModules } from 'enums';
 
 const initData: CategoryState = {
   isFetching: false,
@@ -21,6 +20,15 @@ export default class CategoryReducer {
     state: RecordOf<CategoryState> = initialState,
     action: StandardAction,
   ): RecordOf<CategoryState> {
+    // Handle add from other redux modules
+    const Meta = action.meta as { collections?: ReduxCollectionType };
+    const categoriesFromMeta = Meta?.collections?.[ReduxCollections.CATEGORY];
+    if (categoriesFromMeta && categoriesFromMeta?.length) {
+      return CategoryReducer.handleAddContinues(
+        state,
+        categoriesFromMeta || [],
+      );
+    }
     switch (action.type) {
       // Fetch
       case CategoryAction.TYPES.FETCH.START:
@@ -39,13 +47,6 @@ export default class CategoryReducer {
       case CategoryAction.TYPES.UPDATE_PARTIAL.SUCCESS:
       case CategoryAction.TYPES.UPDATE_PARTIAL.FAILURE:
         return CategoryReducer.handleUpdatePartial(state, action);
-
-      // Other modules
-      // --> From Todo
-
-      case TodoAction.TYPES.FETCH.SUCCESS:
-        return CategoryReducer.handleAddContinues(state, action);
-
       // Sync actions
       default:
         return state;
@@ -60,12 +61,11 @@ export default class CategoryReducer {
       case CategoryAction.TYPES.FETCH.START:
         return state.set('isFetching', true).set('error', '');
       case CategoryAction.TYPES.FETCH.SUCCESS:
-        return state
-          .set('isFetching', false)
-          .set(
-            ReduxCollections.CATEGORY,
-            normalizeArr<CategoryPayload>(action.payload?.categories),
-          );
+        return updateAndIndexingData(
+          action.payload?.categories,
+          ReduxModules.CATEGORY,
+          state,
+        ).set('isFetching', false);
 
       case CategoryAction.TYPES.FETCH.FAILURE:
         return state.set('isFetching', false).set('error', action.error);
@@ -86,12 +86,11 @@ export default class CategoryReducer {
           .set('error', '');
 
       case CategoryAction.TYPES.UPDATE.SUCCESS:
-        return state
-          .setIn(['isUpdatingById', action.payload?.category._id], false)
-          .setIn(
-            ['categories', action.payload?.category._id],
-            action.payload?.category,
-          );
+        return updateAndIndexingData(
+          [action.payload?.category],
+          ReduxModules.CATEGORY,
+          state,
+        ).setIn(['isUpdatingById', action.payload?.category._id], false);
 
       case CategoryAction.TYPES.UPDATE.FAILURE:
         return state
@@ -113,17 +112,12 @@ export default class CategoryReducer {
           .set('error', '');
       case CategoryAction.TYPES.UPDATE_PARTIAL.SUCCESS:
         if (action.payload) {
-          const currentCategory = state.categories[action.payload.category._id];
-          const mergedCategory = merge(
-            currentCategory,
-            action.payload.category,
-          );
-          return state
-            .setIn(['isUpdatingById', action.payload?.category._id], false)
-            .setIn(
-              ['categories', action.payload?.category._id],
-              mergedCategory,
-            );
+          return updateAndIndexingData(
+            [action.payload?.category],
+            ReduxModules.CATEGORY,
+            state,
+            true,
+          ).setIn(['isUpdatingById', action.payload?.category._id], false);
         }
         return state;
 
@@ -139,14 +133,10 @@ export default class CategoryReducer {
 
   static handleAddContinues = (
     state: RecordOf<CategoryState>,
-    action: StandardAction<{}, { collections: ReduxCollectionType }>,
+    categories: CategoryPayload[],
   ): RecordOf<CategoryState> => {
-    const categories = action.meta?.collections[ReduxCollections.CATEGORY];
-    if (categories?.length) {
-      const currentCategories = state.categories;
-      const mergedCategory = merge(currentCategories, normalizeArr(categories));
-      return state.set(ReduxCollections.CATEGORY, mergedCategory);
-    }
-    return state;
+    const currentCategories = state.categories;
+    const mergedCategory = merge(currentCategories, normalizeArr(categories));
+    return state.set('categories', mergedCategory);
   };
 }

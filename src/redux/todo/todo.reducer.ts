@@ -1,17 +1,18 @@
-import { RecordOf, Record, merge } from 'immutable';
+import { RecordOf, Record } from 'immutable';
 
 import TodoAction from './todo.actions';
 import { StandardAction } from '../types';
 import { TodoPayload, TodoState } from './types';
-import { normalizeArr } from 'redux/helpers';
-import { ReduxCollections } from 'enums';
+import { generateIndexes, updateAndIndexingData } from 'redux/helpers';
+import { ReduxModules } from 'enums';
 
 const initData: TodoState = {
   isFetching: false,
   error: null,
   todos: {},
   isUpdatingById: {},
-  selectedCategory: null,
+  selectedCategory: 'beb0bac0-c850-449c-9271-e300a97b65d6',
+  indexes: generateIndexes(ReduxModules.TODO),
 };
 
 const initialState = Record(initData)(initData);
@@ -56,12 +57,12 @@ export default class TodoReducer {
         return state.set('isFetching', true).set('error', '');
       case TodoAction.TYPES.FETCH.SUCCESS:
         if (action.payload) {
-          return state
-            .set('isFetching', false)
-            .set(
-              ReduxCollections.TODO,
-              normalizeArr<TodoPayload>(action.payload.todos),
-            );
+          const newState = updateAndIndexingData(
+            action.payload.todos,
+            ReduxModules.TODO,
+            state,
+          ).set('isFetching', false);
+          return newState;
         }
         return state;
       case TodoAction.TYPES.FETCH.FAILURE:
@@ -83,9 +84,14 @@ export default class TodoReducer {
           .set('error', '');
 
       case TodoAction.TYPES.UPDATE.SUCCESS:
-        return state
-          .setIn(['isUpdatingById', action.payload?.todo._id], false)
-          .setIn(['todos', action.payload?.todo._id], action.payload?.todo);
+        if (action.payload) {
+          return updateAndIndexingData(
+            [action.payload.todo],
+            ReduxModules.TODO,
+            state,
+          ).setIn(['isUpdatingById', action.payload?.todo._id], false);
+        }
+        return state;
 
       case TodoAction.TYPES.UPDATE.FAILURE:
         return state
@@ -107,11 +113,12 @@ export default class TodoReducer {
           .set('error', '');
       case TodoAction.TYPES.UPDATE_PARTIAL.SUCCESS:
         if (action.payload) {
-          const currentTodo = state.todos[action.payload.todo._id];
-          const mergedTodo = merge(currentTodo, action.payload.todo);
-          return state
-            .setIn(['isUpdatingById', action.payload?.todo._id], false)
-            .setIn(['todos', action.payload?.todo._id], mergedTodo);
+          return updateAndIndexingData(
+            [action.payload.todo],
+            ReduxModules.TODO,
+            state,
+            true,
+          ).setIn(['isUpdatingById', action.payload?.todo._id], false);
         }
         return state;
 

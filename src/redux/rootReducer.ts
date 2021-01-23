@@ -3,7 +3,7 @@
  */
 
 import { combineReducers } from '@reduxjs/toolkit';
-import { ReduxModules } from 'enums';
+import { ReduxModulesName } from 'enums';
 import { AuthReducer } from 'redux/auth';
 import { TodoReducer } from 'redux/todo';
 import { CategoryReducer } from 'redux/category';
@@ -14,8 +14,8 @@ import { CategoryReducer } from 'redux/category';
 export function createReducer() {
   // Initially we don't have any injectedReducers, so returning identity function to avoid the error
   return combineReducers({
-    [ReduxModules.AUTH]: AuthReducer.getReducer,
-    [ReduxModules.TODO]: TodoReducer.getReducer,
-    [ReduxModules.CATEGORY]: CategoryReducer.getReducer,
+    [ReduxModulesName.AUTH]: AuthReducer.getReducer,
+    [ReduxModulesName.TODO]: TodoReducer.getReducer,
+    [ReduxModulesName.CATEGORY]: CategoryReducer.getReducer,
   });
 }

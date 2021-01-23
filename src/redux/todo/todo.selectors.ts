@@ -1,7 +1,6 @@
 import { RootState } from 'redux/types';
 import { createSelector } from 'reselect';
-import { CategoryPayload, CategorySelector } from 'redux/category';
-import { TodoPayload } from './types';
+import { CategorySelector } from 'redux/category';
 
 export default class TodoSelectors {
   static getTodos(state: RootState) {
@@ -12,18 +11,25 @@ export default class TodoSelectors {
     return state.todo.selectedCategory;
   }
 
+  static getCategoryIndex(state: RootState) {
+    return state.todo.indexes;
+  }
+
   static getCurrentTodosBySelectedTodo = createSelector(
     TodoSelectors.getTodos,
     TodoSelectors.getSelectedCategory,
+    TodoSelectors.getCategoryIndex,
     CategorySelector.getCategories,
-    (todos, selectedCategory, categories) => {
-      const mapCategory = (todo: TodoPayload): TodoPayload => ({
-        ...todo,
-        category: categories[todo.categoryId],
-      });
-      return Object.values(todos)
-        .filter(todo => todo.categoryId === selectedCategory)
-        .map(mapCategory);
+    (todos, selectedCategory, indexes, categories) => {
+      if (!!selectedCategory) {
+        return (indexes.categoryId[selectedCategory] || []).map(
+          (todoId: string) => ({
+            ...todos[todoId],
+            category: categories[todos[todoId].categoryId],
+          }),
+        );
+      }
+      return [];
     },
   );
 }
