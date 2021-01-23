@@ -99,22 +99,18 @@ export default class AuthReducer {
     state: RecordOf<AuthState>,
     action: StandardAction<undefined>,
   ): RecordOf<AuthState> => {
-    if (action.payload) {
-      switch (action.type) {
-        case AuthAction.TYPES.SIGNOUT.START:
-          return state.set('isSigningOut', true).set('error', '');
+    switch (action.type) {
+      case AuthAction.TYPES.SIGNOUT.START:
+        return state.set('isSigningOut', true).set('error', '');
 
-        case AuthAction.TYPES.SIGNOUT.SUCCESS:
-          return state.set('isSigningOut', false).set('accessToken', null);
+      case AuthAction.TYPES.SIGNOUT.SUCCESS:
+        return state.set('isSigningOut', false).set('accessToken', null);
 
-        case AuthAction.TYPES.SIGNOUT.FAILURE:
-          return state.set('isSigningOut', false).set('error', action.error);
+      case AuthAction.TYPES.SIGNOUT.FAILURE:
+        return state.set('isSigningOut', false).set('error', action.error);
 
-        default:
-          return state;
-      }
+      default:
+        return state;
     }
-
-    return state;
   };
 }

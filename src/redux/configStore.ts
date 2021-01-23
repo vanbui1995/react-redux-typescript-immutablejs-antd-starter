@@ -42,9 +42,9 @@ export function configureAppStore() {
     enhancers,
   });
 
-  persistStore(store);
+  const persistor = persistStore(store);
 
   runSaga(RootSaga);
 
-  return store;
+  return { store, persistor };
 }

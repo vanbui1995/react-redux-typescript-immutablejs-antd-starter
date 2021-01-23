@@ -12,6 +12,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import * as serviceWorker from 'serviceWorker';
+import { PersistGate } from 'redux-persist/integration/react';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -26,15 +27,20 @@ import { configureAppStore } from 'redux/configStore';
 // Initialize languages
 import './locales/i18n';
 
-export const store = configureAppStore();
+const appConfig = configureAppStore();
+
+export const store = appConfig.store;
+export const persistor = appConfig.persistor;
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
     <HelmetProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <PersistGate loading={null} persistor={persistor}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </PersistGate>
     </HelmetProvider>
   </Provider>,
   MOUNT_NODE,

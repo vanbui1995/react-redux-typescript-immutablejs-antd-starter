@@ -55,7 +55,7 @@ function* signInUserWithEmailPassword(action: StandardAction<UserPayload>) {
 
 function* signOut() {
   try {
-    yield call(AuthService.logout);
+    // yield call(AuthService.logout);
     yield put(userSignOutSuccess());
   } catch (error) {
     console.error(error);

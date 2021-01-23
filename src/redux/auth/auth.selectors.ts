@@ -10,4 +10,8 @@ export default class AuthSelectors {
   static getAccessToken = createSelector(AuthSelectors.getAuth, auth => {
     return auth.accessToken;
   });
+
+  static getIsSigning(state: RootState) {
+    return state.auth.isSigningIn;
+  }
 }
