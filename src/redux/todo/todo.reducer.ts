@@ -5,6 +5,7 @@ import { StandardAction } from '../types';
 import { TodoPayload, TodoState } from './types';
 import { generateIndexes, updateAndIndexingData } from 'redux/helpers';
 import { ReduxCollections, ReduxCollectionType, ReduxModules } from 'enums';
+import { AuthAction } from 'redux/auth';
 
 const initData: TodoState = {
   isFetching: false,
@@ -48,7 +49,8 @@ export default class TodoReducer {
         return TodoReducer.handleUpdatePartial(state, action);
 
       // Sync actions
-
+      case AuthAction.TYPES.SIGNOUT.SUCCESS:
+        return initialState;
       default:
         return state;
     }

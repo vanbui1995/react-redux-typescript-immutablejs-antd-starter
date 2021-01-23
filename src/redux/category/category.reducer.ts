@@ -5,6 +5,7 @@ import { StandardAction } from '../types';
 import { CategoryPayload, CategoryState } from './types';
 import { generateIndexes, updateAndIndexingData } from 'redux/helpers';
 import { ReduxCollections, ReduxCollectionType, ReduxModules } from 'enums';
+import { AuthAction } from 'redux/auth';
 
 const initData: CategoryState = {
   isFetching: false,
@@ -49,6 +50,8 @@ export default class CategoryReducer {
       case CategoryAction.TYPES.UPDATE_PARTIAL.FAILURE:
         return CategoryReducer.handleUpdatePartial(state, action);
       // Sync actions
+      case AuthAction.TYPES.SIGNOUT.SUCCESS:
+        return initialState;
       default:
         return state;
     }

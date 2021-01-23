@@ -104,7 +104,7 @@ export default class AuthReducer {
         return state.set('isSigningOut', true).set('error', '');
 
       case AuthAction.TYPES.SIGNOUT.SUCCESS:
-        return state.set('isSigningOut', false).set('accessToken', null);
+        return initialState;
 
       case AuthAction.TYPES.SIGNOUT.FAILURE:
         return state.set('isSigningOut', false).set('error', action.error);
