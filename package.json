@@ -2,29 +2,41 @@
   "name": "bioandme-frontend",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "test:generators": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/testing/test-generators.ts",
+    "start:prod": "yarn run build && serve -s build",
+    "checkTs": "tsc --noEmit",
+    "eslint": "eslint --ext js,ts,tsx",
+    "lint": "yarn run eslint src",
+    "lint:fix": "yarn run eslint --fix src",
+    "lint:css": "stylelint src/**/*.css",
+    "generate": "cross-env TS_NODE_PROJECT='./internals/ts-node.tsconfig.json' plop --plopfile internals/generators/plopfile.ts",
+    "prettify": "prettier --write",
+    "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@reduxjs/toolkit": "1.4.0",
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "11.0.2",
-    "@types/fontfaceobserver": "0.0.6",
-    "@types/jest": "25.1.4",
-    "@types/lodash": "4.14.168",
-    "@types/node": "14.6.4",
-    "@types/react": "16.9.49",
-    "@types/react-dom": "16.9.8",
-    "@types/react-redux": "7.1.9",
-    "@types/react-router-dom": "5.1.5",
-    "@types/react-test-renderer": "16.9.3",
-    "@types/rimraf": "3.0.0",
-    "@types/shelljs": "0.8.8",
-    "@types/styled-components": "5.1.3",
-    "@types/testing-library__jest-dom": "5.9.2",
-    "@types/webpack": "4.41.22",
-    "@types/webpack-env": "1.15.2",
     "antd": "4.10.3",
     "axios": "0.21.1",
     "chalk": "4.1.0",
-    "connected-react-router": "6.8.0",
     "cross-env": "7.0.2",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
@@ -51,6 +63,7 @@
     "react-scripts": "4.0.1",
     "react-test-renderer": "16.13.1",
     "redux-injectors": "1.3.0",
+    "redux-persist": "6.0.0",
     "redux-saga": "1.1.3",
     "reselect": "4.0.0",
     "rimraf": "3.0.2",
@@ -64,35 +77,31 @@
     "stylelint-processor-styled-components": "1.10.0",
     "ts-node": "9.0.0",
     "typescript": "4.0.5",
-    "web-vitals": "0.2.4"
+    "web-vitals": "0.2.4",
+    "yarn": "1.22.10"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "test:generators": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/testing/test-generators.ts",
-    "start:prod": "yarn run build && serve -s build",
-    "checkTs": "tsc --noEmit",
-    "eslint": "eslint --ext js,ts,tsx",
-    "lint": "yarn run eslint src",
-    "lint:fix": "yarn run eslint --fix src",
-    "lint:css": "stylelint src/**/*.css",
-    "generate": "cross-env TS_NODE_PROJECT='./internals/ts-node.tsconfig.json' plop --plopfile internals/generators/plopfile.ts",
-    "prettify": "prettier --write",
-    "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "babel-plugin-import": "1.13.3",
+    "customize-cra": "1.0.0",
+    "less": "4.1.0",
+    "less-loader": "7.3.0",
+    "react-app-rewired": "2.1.8",
+    "@types/fontfaceobserver": "0.0.6",
+    "@types/jest": "25.1.4",
+    "@types/lodash": "4.14.168",
+    "@types/node": "14.6.4",
+    "@types/react": "16.9.49",
+    "@types/react-dom": "16.9.8",
+    "@types/react-redux": "7.1.9",
+    "@types/react-router-dom": "5.1.5",
+    "@types/react-test-renderer": "16.9.3",
+    "@types/redux-persist": "4.3.1",
+    "@types/rimraf": "3.0.0",
+    "@types/shelljs": "0.8.8",
+    "@types/styled-components": "5.1.3",
+    "@types/testing-library__jest-dom": "5.9.2",
+    "@types/webpack": "4.41.22",
+    "@types/webpack-env": "1.15.2"
   },
   "engines": {
     "npm": ">=6.4.1",

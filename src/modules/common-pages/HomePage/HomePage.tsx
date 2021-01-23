@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 import { TodoAction, TodoSelectors } from 'redux/todo';
 
-export function HomePage() {
+export default function HomePage() {
   const todos = useSelector(TodoSelectors.getCurrentTodosBySelectedTodo);
   const dispatch = useDispatch();
   const handleLoad = () => {

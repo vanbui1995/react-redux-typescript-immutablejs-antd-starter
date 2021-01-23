@@ -1,13 +1,15 @@
 /**
  * Create the store with dynamic reducers
  */
-
+import storage from 'redux-persist/lib/storage';
 import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
 import { createInjectorsEnhancer } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
 
 import { createReducer } from './rootReducer';
 import RootSaga from './rootSaga';
+import CustomImmutableTransform from './immutableTransform';
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
@@ -24,12 +26,23 @@ export function configureAppStore() {
     }),
   ];
 
+  const persistConfig = {
+    transforms: [CustomImmutableTransform],
+    key: 'root',
+    storage,
+    whitelist: ['auth'],
+  };
+
+  const persistedReducer = persistReducer(persistConfig, createReducer());
+
   const store = configureStore({
-    reducer: createReducer(),
+    reducer: persistedReducer,
     middleware: [...middlewares],
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
   });
+
+  persistStore(store);
 
   runSaga(RootSaga);
 

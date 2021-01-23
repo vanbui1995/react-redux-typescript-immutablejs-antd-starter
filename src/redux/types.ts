@@ -1,5 +1,4 @@
 import { Action, ReducersMapObject } from 'redux';
-import { RouterState } from 'connected-react-router';
 import { RecordOf } from 'immutable';
 
 import { AuthState } from './auth/types';

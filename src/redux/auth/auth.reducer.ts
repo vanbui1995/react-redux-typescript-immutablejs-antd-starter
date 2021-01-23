@@ -4,7 +4,7 @@ import AuthAction from './auth.actions';
 import { StandardAction } from '../types';
 import { AuthState } from './types';
 
-const initData: AuthState = {
+export const initData: AuthState = {
   accessToken: null,
   error: '',
   isSigningIn: false,
