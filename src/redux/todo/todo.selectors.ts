@@ -1,6 +1,7 @@
 import { RootState } from 'redux/types';
 import { createSelector } from 'reselect';
 import { CategorySelector } from 'redux/category';
+import { IndexeKeys } from 'enums';
 
 export default class TodoSelectors {
   static getTodos(state: RootState) {
@@ -12,17 +13,17 @@ export default class TodoSelectors {
   }
 
   static getCategoryIndex(state: RootState) {
-    return state.todo.indexes;
+    return state.todo.indexes[IndexeKeys.TODO_CATEGORY_ID];
   }
 
-  static getCurrentTodosBySelectedTodo = createSelector(
+  static getCurrentTodosBySelectedCategory = createSelector(
     TodoSelectors.getTodos,
     TodoSelectors.getSelectedCategory,
     TodoSelectors.getCategoryIndex,
     CategorySelector.getCategories,
-    (todos, selectedCategory, indexes, categories) => {
+    (todos, selectedCategory, categoryIndex, categories) => {
       if (!!selectedCategory) {
-        return (indexes.categoryId[selectedCategory] || []).map(
+        return (categoryIndex[selectedCategory] || []).map(
           (todoId: string) => ({
             ...todos[todoId],
             category: categories[todos[todoId].categoryId],

@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { TodoAction, TodoSelectors } from 'redux/todo';
 
 export default function HomePage() {
-  const todos = useSelector(TodoSelectors.getCurrentTodosBySelectedTodo);
+  const todos = useSelector(TodoSelectors.getCurrentTodosBySelectedCategory);
   const dispatch = useDispatch();
   const handleLoad = () => {
     dispatch(TodoAction.fetchTodo());
