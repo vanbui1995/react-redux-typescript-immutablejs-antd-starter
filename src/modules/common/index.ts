@@ -1,2 +1,2 @@
-import { default as ControlledInput } from './input/ControlledInput/ControlledInput';
-import { default as UncontrolledInput } from './input/UncontrolledInput/UncontrollInput';
+export { default as ControlledInput } from './input/ControlledInput/ControlledInput';
+export { default as UncontrolledInput } from './input/UncontrolledInput/UncontrollInput';

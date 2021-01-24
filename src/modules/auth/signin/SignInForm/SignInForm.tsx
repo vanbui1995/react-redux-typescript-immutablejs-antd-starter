@@ -7,7 +7,7 @@ import { AuthAction, AuthSelectors } from 'redux/auth';
 import { useHistory } from 'react-router-dom';
 import { ROUTE_PATH } from 'enums';
 import { useTranslation } from 'react-i18next';
-import ControlledInput from 'modules/common/input/ControlledInput/ControlledInput';
+import { ControlledInput } from 'modules/common';
 import { INPUT_TYPES } from 'modules/common/input/type';
 
 const layout = {
