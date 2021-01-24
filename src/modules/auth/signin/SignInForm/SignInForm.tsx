@@ -51,8 +51,8 @@ export default function SignInForm() {
       render={({ handleSubmit }) => (
         <Form {...layout} onFinish={handleSubmit}>
           <ControlledInput
-            inputType={INPUT_TYPES.INPUT} // inputType used to determine using specific custom input
-            type={'email'} // type is props of Input ant component
+            inputType={INPUT_TYPES.INPUT} // inputType used to determine using our specific custom input
+            type={'email'} // type is a prop of Input Ant component
             name="email"
             label={t('common.email')}
           />
