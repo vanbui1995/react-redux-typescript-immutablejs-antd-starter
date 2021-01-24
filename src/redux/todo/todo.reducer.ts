@@ -65,7 +65,7 @@ export default class TodoReducer {
         return state.set('isFetching', true).set('error', '');
       case TodoAction.TYPES.FETCH.SUCCESS:
         if (action.payload) {
-          const newState = updateAndIndexingData(
+          const newState = updateAndIndexingData<TodoPayload, TodoState>(
             action.payload.todos,
             ReduxModules.TODO,
             state,
@@ -93,7 +93,7 @@ export default class TodoReducer {
 
       case TodoAction.TYPES.UPDATE.SUCCESS:
         if (action.payload) {
-          return updateAndIndexingData(
+          return updateAndIndexingData<TodoPayload, TodoState>(
             [action.payload.todo],
             ReduxModules.TODO,
             state,
@@ -121,7 +121,7 @@ export default class TodoReducer {
           .set('error', '');
       case TodoAction.TYPES.UPDATE_PARTIAL.SUCCESS:
         if (action.payload) {
-          return updateAndIndexingData(
+          return updateAndIndexingData<TodoPayload, TodoState>(
             [action.payload.todo],
             ReduxModules.TODO,
             state,
@@ -144,6 +144,10 @@ export default class TodoReducer {
     state: RecordOf<TodoState>,
     todos: TodoPayload[],
   ): RecordOf<TodoState> => {
-    return updateAndIndexingData(todos, ReduxModules.TODO, state);
+    return updateAndIndexingData<TodoPayload, TodoState>(
+      todos,
+      ReduxModules.TODO,
+      state,
+    );
   };
 }

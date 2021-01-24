@@ -65,7 +65,7 @@ export default class CategoryReducer {
       case CategoryAction.TYPES.FETCH.START:
         return state.set('isFetching', true).set('error', '');
       case CategoryAction.TYPES.FETCH.SUCCESS:
-        return updateAndIndexingData(
+        return updateAndIndexingData<CategoryPayload, CategoryState>(
           action.payload?.categories,
           ReduxModules.CATEGORY,
           state,
@@ -90,11 +90,14 @@ export default class CategoryReducer {
           .set('error', '');
 
       case CategoryAction.TYPES.UPDATE.SUCCESS:
-        return updateAndIndexingData(
-          [action.payload?.category],
-          ReduxModules.CATEGORY,
-          state,
-        ).setIn(['isUpdatingById', action.payload?.category._id], false);
+        if (action.payload?.category) {
+          return updateAndIndexingData<CategoryPayload, CategoryState>(
+            [action.payload.category],
+            ReduxModules.CATEGORY,
+            state,
+          ).setIn(['isUpdatingById', action.payload?.category._id], false);
+        }
+        return state;
 
       case CategoryAction.TYPES.UPDATE.FAILURE:
         return state
@@ -116,8 +119,8 @@ export default class CategoryReducer {
           .set('error', '');
       case CategoryAction.TYPES.UPDATE_PARTIAL.SUCCESS:
         if (action.payload) {
-          return updateAndIndexingData(
-            [action.payload?.category],
+          return updateAndIndexingData<CategoryPayload, CategoryState>(
+            [action.payload.category],
             ReduxModules.CATEGORY,
             state,
             true,
@@ -139,6 +142,10 @@ export default class CategoryReducer {
     state: RecordOf<CategoryState>,
     categories: CategoryPayload[],
   ): RecordOf<CategoryState> => {
-    return updateAndIndexingData(categories, ReduxModules.CATEGORY, state);
+    return updateAndIndexingData<CategoryPayload, CategoryState>(
+      categories,
+      ReduxModules.CATEGORY,
+      state,
+    );
   };
 }

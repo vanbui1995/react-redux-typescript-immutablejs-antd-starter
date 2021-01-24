@@ -4,7 +4,8 @@
     "email": "Email",
     "password": "Password",
     "submit": "Submit",
-    "signout": "Sign Out"
+    "signout": "Sign Out",
+    "select": "Select"
   },
   "validation": {
     "messages": {
