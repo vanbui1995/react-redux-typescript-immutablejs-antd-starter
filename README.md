@@ -1,143 +1,97 @@
-<img width="914" alt="React Boilerplate Meets CRA" src="https://user-images.githubusercontent.com/3495307/80274591-2d5daa00-86e4-11ea-8fba-404f1cdba87e.png" align="center">
-<br />
+# amili-dashboard
 
-<div align="center" >Crafted for <strong>highly scalable</strong> & <strong>performant</strong> and <strong>easily maintainable</strong> React.js applications <br /> 
-with a focus on  
-<strong>best DX</strong> and <strong>best practices</strong>.
-</div>
+## Overview
 
-<br />
+- **[Project on a page](Link)**
+- **[Goals and measures](Link)**
+- **[Glossary](Link)**
+- **[Supporting Documents](Link)**
+- **[Presentation](Link)**
 
-<div align="center">
-  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%3Abuild">
-    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/build/badge.svg" alt="Build Status" />
-  </a>
-  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%3Atests">
-    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/test/badge.svg" alt="Tests Status" />
-  </a>
-  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%release">
-    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/release/badge.svg" alt="Release Status" />
-  </a>
-</div>
+## Requirements
 
-<div align="center">
-  <a href="https://coveralls.io/github/react-boilerplate/react-boilerplate-cra-template">
-    <img src="https://coveralls.io/repos/github/react-boilerplate/react-boilerplate-cra-template/badge.svg?branch=master" alt="Coverage" />
-  </a>
-  <a href="https://opencollective.com/react-boilerplate">
-    <img src="https://opencollective.com/react-boilerplate/backers/badge.svg" alt="Backers" />
-  </a>
-  <a href="https://opencollective.com/react-boilerplate/">
-    <img src="https://opencollective.com/react-boilerplate/sponsors/badge.svg" alt="Sponsors" />
-  </a>
-</div>
+- **[Current journey map](Link)**
+- **[Future journey map](Link)**
+- **Epics ([All](Link) / [Open](Link) )**- representing a high level feature set that is typcially delivered across multiple sprints.
+- **Stories ([All](Link) / [Open](Link) )** - representing specific testable user or system requirements that can usually be implemented in one sprint.
 
-<br />
+## Usage
 
----
+- Instruction of devevelopment & deployment will be here
 
-The official [Create React App](https://github.com/facebook/create-react-app) template of [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate)
-![](https://img.shields.io/github/stars/react-boilerplate/react-boilerplate?style=flat)
+## Testing purpose
 
-Start your `create-react-app` projects in seconds with the best, industry-standard tools and practices made ready for you.
+- **[All testing accounts will be here](Link)**
 
-**📚Documentation:** [Gitbook](https://cansahin.gitbook.io/react-boilerplate-cra-template/)
+## Test Framework
 
-**🎨 Check the example app:** [Boilerplate Example Application](https://react-boilerplate.github.io/react-boilerplate-cra-template/)
+A Behaviour Driven Develpment (BDD) model is at the heart of the testing frameork.
 
-**🚑 Collection of `'HOW TO'`s:** [Examples & Tutorials for common patterns](https://github.com/react-boilerplate/cra-template-examples)
+- **[Tests Data Management](Link)**
+- **[BDD Tests Cases](Link)**
 
-**📦 Package:** [npm](https://www.npmjs.com/package/cra-template-rb)
+## System Operations
 
-![version](https://img.shields.io/npm/v/cra-template-rb)
-![version](https://img.shields.io/npm/dm/cra-template-rb)
+A highly automated continuous delivery pipeline based on the [Code On Tap](http://codeontap.io/) OR [Jenkins](https://www.jenkins.io/) is used for confident deployment of new features.
 
----
+- **[DevOps Framework](Link)**
+- **[System Access](Link)**
 
-## Install & Start
+## Project Management
 
-Create React App with the template
+We use [Click Up](https://clickup.com/) for Project Management & Document Wiki
 
-```shell
-npx create-react-app --template cra-template-rb my-app
-```
+- **[Raw Issues List](Link)**
+- **[Milestones](Link)**
+- **[Kanban Board](Link)**
 
-Start and check our example app, if you want
+## Team
 
-```shell
-cd my-app
-yarn start
-```
+Zigvy Corp (HCMC - VN)
 
-Remove the example app to start your project!
+- Hau Nguyen - @haunguyen90 Project Manager - Take care of Clients and Delivery (HCMC, VN, GMT +7)
+- Van Bui - @vanbui1995 Project Lead - Manage Tasks, Development Progress, Plans/Goal (HCMC, VN, GMT +7)
+- Phat Doan - @phatdvzv Full-stack Senior Dev (HCMC, VN, GMT +7)
+- Duong Phan - @pnhduongen Full-stack Senior Dev (HCMC, VN, GMT +7)
+- Tung Mac - @macminhtung Full-stack Mid Dev (HCMC, VN, GMT +7)
 
-```shell
-yarn run cleanAndSetup
-```
+Partners/Project Co-owner:
 
-## Features
+- Vivek Ravindran - @Vivek-amili Project Owner (Singapore, GMT +8)
+- Chen Ning - @chenningg Technical & Business Manager (Singapore, GMT +8)
+- Raghu Vdm - DevOps / Cloud Service Manager (Singapore, GMT +8)
 
-<dl>
+## Coding Workflow
 
-  <dt>Predictable state management</dt>
-  <dd>Unidirectional data flow allows for change logging and time travel debugging.</dd>
+This project uses the git forking workflow, https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow
+And git-flow, https://bitbucket.org/zigvy/git-flow/src/master/ or https://jeffkreeftmeijer.com/git-flow/
 
-  <dt>Instant feedback</dt>
-  <dd>Enjoy the best DX (Developer eXperience) and code your app at the speed of thought! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page. Preserve application state even when you update something in the underlying code!</dd>
+It's OK to leave questions hanging in slack, for someone who isn't there at the moment but will be later. So each shift should start with a review of slack, "question grooming" activity, along with the usual ticket-grooming.
 
-  <dt>Next generation CSS</dt>
-  <dd>Write composable CSS that's co-located with your components for complete modularity. Unique generated class names keep the specificity low while eliminating style clashes. Ship only the styles that are on the page for the best performance.</dd>
+Clone the repo, commit frequently, make a PR for dicussion early (and if you think it's ready to merge then say so).
 
-  <dt>Industry-standard routing</dt>
-  <dd>It's natural to want to add pages (e.g. `/about`) to your application, and routing makes this possible.</dd>
+Try to push to your commits at least once an hour, and write commit messages "in the imperative mood". Read this if you haven't already: http://chris.beams.io/posts/git-commit/
 
-  <dt>Industry-standard i18n internationalization support</dt>
-  <dd>Scalable apps need to support multiple languages, easily add and support multiple languages.</dd>
+Each commit should do one thing. It's no problem making lots of small commits, it's actualy much better than infrequent large commit because they are easier to review.
 
-  <dt>Typescript</dt>
-  <dd>Typescript is the key to scalability. Build self-documented code, easy-to-debug code and create maintainable large applications and codebases with a highly productive development experience.</dd>
+## Github workflow
 
-  <dt>Quick scaffolding</dt>
-  <dd>Create components, containers, routes, selectors and sagas - and their tests - right from the CLI!</dd>
+We use the Pull Request system of github.
+You first need to fork the repo.
 
-  <dt>Static code analysis</dt>
-  <dd>Focus on writing new features without worrying about formatting or code quality. With the right editor setup, your code will automatically be formatted and linted as you work.</dd>
+For creating a PR please follow this :
 
-  <dt>SEO</dt>
-  <dd>We support SEO (document head tags management) for search engines that support indexing of JavaScript content. (eg. Google)</dd>
-</dl>
+- Fetch the upstream master & develop : `git fetch upstream/master && git fetch upstream/develop`
+- Switch to `develop` branch.
+- Create a new clean branch : `git checkout --track -b myNewBranch upstream/develop` , a good practice is to following [git-flow](https://jeffkreeftmeijer.com/git-flow/) ( you should not use the master of your own remote ( `origin` ) as a dev branch , your master should be equal to the `upstream/master` )
+- Do your work, _make commits_, you should create directly a PR and _push your work frequently_.
+- If other devs push commits , you should rebase your own branch. you fetch again `git fetch upstream/develop` and `git rebase upstream/develop` ( you can also use the interactive rebase to squash your commit into one `git rebase -i upstream/develop` )
+- If you have conflict , you have to resolve each conflict on each commit , do it manually or add `kdiff3` / `Beyond Compare` or anything that fit you , add these modification and do `git rebase --continue` until you cleared the conflicts.
+- Test your code.
+- You can now push your code , if the branch is new you just do git `push origin myNewBranch` , if you had rebase you need to force the `push git push origin myNewBranch -f`
+- Create the PR , with a new branch github detect it automatically you should see a yellow bar on main page. MOST IMPORTANT, point the PR to `develop` branch
+- When the PR is merged , delete you local and remote branch
 
-But wait... there's more!
+**More you rebase your branch often, less you get problems. So don't wait ! You should rebase each time a commit is added to the upstream/master.**
 
-- _The best test setup:_ Automatically guarantee code quality and non-breaking
-  changes. (Seen a react app with 100% test coverage before?)
-- _The fastest fonts:_ Say goodbye to vacant text.
-- _Stay fast_: Profile your app's performance from the comfort of your command
-  line!
-
-<sub><i>Keywords: Create React App, React Boilerplate, Custom Template, Typescript, React.js, Redux, Hot Reloading, ESNext, Babel, react-router, Offline First, ServiceWorker, `styled-components`, redux-saga, FontFaceObserver</i></sub>
-
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/Can-Sahin"><img src="https://avatars2.githubusercontent.com/u/33245689?s=80" width="80px;" alt=""/><br /><sub><b>Can Sahin</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=Can-Sahin" title="Code">💻</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=Can-Sahin" title="Documentation">📖</a> <a href="#ideas-Can-Sahin" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/pulls?q=is%3Apr+reviewed-by%3ACan-Sahin" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=Can-Sahin" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/receptiryaki"><img src="https://avatars0.githubusercontent.com/u/3495307?s=80" width="80px;" alt=""/><br /><sub><b>Recep Tiryaki</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=receptiryaki" title="Code">💻</a> <a href="#ideas-receptiryaki" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-receptiryaki" title="Design">🎨</a></td>
-    <td align="center"><a href="https://github.com/mogsdad"><img src="https://avatars3.githubusercontent.com/u/1707731?s=80" width="80px;" alt=""/><br /><sub><b>David Bingham</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=mogsdad" title="Documentation">📖</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## License
-
-This project is licensed under the MIT license, Copyright (c) 2019 Maximilian Stoiber.
-For more information see `LICENSE.md`.
+**DISCLAIMER** : Use _`push -f`_ only with **Fork and PR project** like here, never on a project were everyone is working on the **same remote**. Your rewrite commits history.
